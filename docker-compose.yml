@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  db:
+    container_name: postgres
+    image: postgres:alpine
+    volumes:
+      - ./db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=django_app
+      - POSTGRES_USER=django_app
+      - POSTGRES_PASSWORD=django_app
+
+  web:
+    container_name: django_app
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/code
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_DB=django_app
+      - POSTGRES_USER=django_app
+      - POSTGRES_PASSWORD=django_app
+    depends_on:
+      - db
+
