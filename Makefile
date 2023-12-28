@@ -10,14 +10,14 @@ django_shell:  ## Enters django container
 django_orm:  ## Enters django ORM
 	docker exec -it ${DJANGO_CONTAINER} sh -c "./manage.py shell_plus"
 
-postgres_shell:
+postgres_shell:  ## Enters postgres container
 	docker exec -it ${POSTGRES_CONTAINER} sh
 
-start:
+start:  ## Start all containers
 	docker compose up
 
-stop:
+stop:  ## Stop all containers
 	docker compose stop
 
-clean:
+clean:  ## Delete all containers
 	docker compose down
